@@ -7,9 +7,10 @@ export class AppController {
   constructor() {}
 
   @Get()
-  index(): {} {
+  index(): any {
     return {
       version: pkg.version,
+      env: process.env.ENVIRONMENT
     };
   }
 }
