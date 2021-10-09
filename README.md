@@ -10,20 +10,15 @@ $ npm install
 
 ## Configuration
 
-The application reads environment variables from `.env` files in the root directory in the following order:
-
-- .env.development
-- .env.testing
-- .env.production
-- .env
-
-If a variable is set in multiple files the first value is set in the environment.
+The application reads environment variables from a `.env` file in the root directory
 
 ```bash
 ENVIRONMENT=development
 ```
 
-The variables are then available in the application via `process.env.ENVIRONMENT`
+The variables are then available in the application via `process.env.ENVIRONMENT` and are grouped together under `src/config/config.ts`.
+The values can be accessed by the `ConfigService` from `@nestjs/config` which can be injected in controller constructors. The configuration
+is available globally in the application.
 
 ## Running the app
 
