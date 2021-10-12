@@ -1,4 +1,5 @@
 export default () => ({
+  environment: process.env.ENVIRONMENT || 'development',
   port: parseInt(process.env.PORT) || 3000,
   database: {
     hostname: process.env.DB_HOSTNAME || 'localhost',
