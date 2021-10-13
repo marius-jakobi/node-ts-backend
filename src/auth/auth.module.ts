@@ -14,7 +14,9 @@ import { JwtStrategy } from './strategies/jwt.strategy';
     PassportModule,
     JwtModule.register({
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '60s' }
+      signOptions: { 
+        expiresIn: process.env.ENVIRONMENT == 'development' ? '1d' : '1h'
+      }
     })
   ],
   providers: [AuthService, LocalStrategy, JwtStrategy],

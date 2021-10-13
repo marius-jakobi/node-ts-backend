@@ -13,9 +13,8 @@ import { UsersModule } from './users/users.module';
       isGlobal: true,
       load: [config]
     }),
-    UsersModule,
     TypeOrmModule.forRoot({
-      type: 'mysql',
+      type: 'mariadb',
       host: process.env.DB_HOSTNAME,
       port: parseInt(process.env.DB_PORT),
       username: process.env.DB_USER,
@@ -24,7 +23,8 @@ import { UsersModule } from './users/users.module';
       entities: ["dist/**/*.entity{.ts,.js}"],
       synchronize: process.env.ENVIRONMENT == 'production' ? false : true,
       
-    })
+    }),
+    UsersModule,
   ],
   controllers: [AppController],
 })
