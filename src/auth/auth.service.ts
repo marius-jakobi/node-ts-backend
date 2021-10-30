@@ -45,7 +45,7 @@ export class AuthService {
   }
 
   /**
-   * 
+   * Register a user with a hashed password
    * @param registerUserDto User to register
    * @returns Newly created user
    */
