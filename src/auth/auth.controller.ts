@@ -36,15 +36,15 @@ export class AuthController {
    */
   @Post('register')
   async register(@Body() registerUserDto: RegisterUserDto, @Res() res: Response) {
-    if (!registerUserDto.username || !registerUserDto.password) {
-      throw new HttpException('Please provide a username and password', HttpStatus.BAD_REQUEST)
+    if (!registerUserDto.email || !registerUserDto.password) {
+      throw new HttpException('Please provide a email and password', HttpStatus.BAD_REQUEST)
     }
 
     const user = await this.authService.register(registerUserDto)
 
     res.status(HttpStatus.CREATED).json({
       id: user.id,
-      username: user.username
+      email: user.email
     });
   }
 }

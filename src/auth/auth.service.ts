@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { User } from 'src/users/user.entity';
 import { UsersService } from 'src/users/users.service';
@@ -16,14 +16,18 @@ export class AuthService {
   ) { }
 
   /**
-   * Validates a user by username and password
+   * Validates a user by email and password
    * 
-   * @param  {string} username
+   * @param  {string} email
    * @param  {string} password
    * @returns A user if found and valid or null
    */
-  async validateUser(username: string, password: string): Promise<any> | null {
-    const user = await this.usersService.findByUsername(username);
+  async validateUser(email: string, password: string): Promise<any> | null {
+    const user = await this.usersService.findByEmail(email);
+
+    if (!user) {
+      throw new UnauthorizedException();
+    }
 
     const validPassword = await bcrypt.compare(password, user.password);
 
@@ -43,7 +47,8 @@ export class AuthService {
    * @returns A object with a access_token
    */
   async login(user: User) {
-    const payload = { username: user.username, sub: user.id };
+    const payload = { email: user.email, sub: user.id };
+    
     return {
       access_token: this.jwtService.sign(payload)
     }
@@ -56,7 +61,7 @@ export class AuthService {
    */
   async register(registerUserDto: RegisterUserDto): Promise<User> {
     // Check if user exists
-    const result = await this.usersService.findByUsername(registerUserDto.username);
+    const result = await this.usersService.findByEmail(registerUserDto.email);
 
     if (result) {
       // User already exists
