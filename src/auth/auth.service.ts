@@ -18,8 +18,6 @@ export class AuthService {
   /**
    * Validates a user by username and password
    * 
-   * TODO: Use hashed passwords
-   * 
    * @param  {string} username
    * @param  {string} password
    * @returns A user if found and valid or null
