@@ -1,6 +1,6 @@
 # nest-backend
 
-A JavaScript backend powered by Node.js and Nest.
+A JavaScript backend powered by Node.js and Nest. Also MySQL Databases are supported.
 
 ## Installation
 
@@ -19,6 +19,19 @@ ENVIRONMENT=development
 The variables are then available in the application via `process.env.ENVIRONMENT` and are grouped together under `src/config/config.ts`.
 The values can be accessed by the `ConfigService` from `@nestjs/config` which can be injected in controller constructors. The configuration
 is available globally in the application.
+
+### Configuration example in `.env`
+
+```bash
+ENVIRONMENT=development
+PORT=9000
+
+DB_HOSTNAME=localhost
+DB_PORT=3306
+DB_NAME=testdb
+DB_USER=root
+DB_PASSWORD=dbpassword
+```
 
 ## Running the app
 
