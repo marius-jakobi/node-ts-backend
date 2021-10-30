@@ -18,7 +18,7 @@ export class AuthService {
    * 
    * @param  {string} username
    * @param  {string} password
-   * @returns Promise<User | null>
+   * @returns A user if found and valid or null
    */
   async validateUser(username: string, password: string): Promise<any> | null {
     const user = await this.usersService.findByUsername(username);
