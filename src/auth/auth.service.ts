@@ -37,6 +37,11 @@ export class AuthService {
     return null;
   }
 
+  /**
+   * Create a signed authentication token with the user in payload
+   * @param user 
+   * @returns A object with a access_token
+   */
   async login(user: User) {
     const payload = { username: user.username, sub: user.id };
     return {
