@@ -29,12 +29,12 @@ export class UsersService {
   }
 
   /**
-   * Return a single user by username
-   * @param username Username
-   * @returns A user by username
+   * Return a single user by email
+   * @param email
+   * @returns A user by email
    */
-  async findByUsername(username: string): Promise<User> {
-    return this.usersRepository.findOne({ username })
+  async findByEmail(email: string): Promise<User> {
+    return this.usersRepository.findOne({ email })
   }
 
   /**
@@ -44,7 +44,7 @@ export class UsersService {
    */
   async createOne(registerUserDto: RegisterUserDto): Promise<User> {
     const user = new User();
-    user.username = registerUserDto.username;
+    user.email = registerUserDto.email;
     user.password = registerUserDto.password;
     
     return this.usersRepository.save(user);
