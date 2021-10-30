@@ -1,10 +1,11 @@
 import { Controller, Get } from '@nestjs/common';
 
 import pkg from "../package.json";
+import { UsersService } from './users/users.service';
 
 @Controller()
 export class AppController {
-  constructor() {}
+  constructor(private userService: UsersService) {}
 
   @Get()
   index(): any {
